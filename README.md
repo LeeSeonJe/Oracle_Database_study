@@ -34,9 +34,18 @@
 + Result Set은 0개 이상의 행이 포함될 수 있고 특정 기준에 의해 정렬 가능
 + 한(여러) 테이블의 특정 컬럼, 행, 행/컬럼 조회 가능
 
+
   + 작성법
-  ```
+  ```sql
     SELECT 컬럼명[,컬럼명, ...]  // 조회하고자 하는 컬럼명 기술
     FROM 테이블명 // 조회 대상 컬럼이 포함된 테이블명
     WHERE 조건식; // 행을 선택하는 조건 기술
   ```
+    + SELECT 예시
+    ```sql
+      직원 전부의 모든 정보를 조회하는 구문
+      SELECT * FROM EMPLOYEE
+      
+      SELECT EMP_NAME, SALARY * 12, (SALARY + (SALARY*BONUS)) * 12
+      FROM EMPLOYEE;
+    ```
