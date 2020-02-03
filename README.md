@@ -46,6 +46,7 @@
       직원 전부의 모든 정보를 조회하는 구문
       SELECT * FROM EMPLOYEE
       
+      컬럼 값에 대해 산술 연산한 결과 조회 
       SELECT EMP_NAME, SALARY * 12, (SALARY + (SALARY*BONUS)) * 12
       FROM EMPLOYEE;
     ```
