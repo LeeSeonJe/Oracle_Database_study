@@ -43,10 +43,38 @@
   ```
     + SELECT 예시
     ```sql
-      직원 전부의 모든 정보를 조회하는 구문
+      -- 직원 전부의 모든 정보를 조회하는 구문
       SELECT * FROM EMPLOYEE
       
-      컬럼 값에 대해 산술 연산한 결과 조회 
+      -- 컬럼 값에 대해 산술 연산한 결과 조회 
       SELECT EMP_NAME, SALARY * 12, (SALARY + (SALARY*BONUS)) * 12
       FROM EMPLOYEE;
+      
+      -- *(아스트로)는 혼자사용해야 한다.
+      SELECT *, SALARY * 12 
+      -- 2개의 * 가 들어갔다. 허용되지 않아 에러가 발생된다. 
+      -- 전체를 뽑거나 곱하기를 하거나 둘 중 하나만 해야한다.
+      FROM EMPLOYEE;
+      
+      -- 반올림, 올림, 내림, 버림 사용하기
+      SELECT SYSDATE - HIRE_DATE 근무일수, ROUND(SYSDATE-HIRE_DATE) 반올림, CEIL(SYSDATE-HIRE_DATE) 올림,
+              FLOOR(SYSDATE - HIRE_DATE) 내림, TRUNC(SYSDATE - HIRE_DATE) 버림
+      FROM EMPLOYEE;      
+      
+      -- 컬럼 별징
+      -- 컬럼명 AS 별칭
+      -- 컬럼명 "별칭" // 별칭에 띄어쓰기, 특수문자, 숫자가 포함될 경우 무조건 ""으로 묶는다.
+      -- 컬럼명 AS "별칭" 
+      -- 컬럼명 별칭
+      
+      -- EMPLOYEE테이블에서 직원의 직원명(별칭 : 이름), 연봉(별칭 : 연봉(원)), 보너스를 추가한 연봉(별칭 : 총소득(원)) 조회
+      SELECT EMP_NAME 이름, SALARY * 12 "연봉(원)", (SALARY * (1+BONUS))*12 AS "총소득(원)"
+      FROM EMPLOYEE;
+
+      -- EMPLOYEE테이블에서 이름, 고용일, 근무일수(오늘날짜 - 고용일) 조회
+      SELECT EMP_NAME AS "이름", HIRE_DATE AS "고용일", SYSDATE-HIRE_DATE "근무일수"
+      FROM EMPLOYEE;
     ```
++
+  + 컬럼명 "별칭" // 별칭에 띄어쓰기, 특수문자, 숫자가 포함될 경우 무조건 ""으로 묶는다.
+  + 가급적 ""(더블 커텐션)으로 묶도록 연습하자.!
