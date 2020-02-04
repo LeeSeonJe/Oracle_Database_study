@@ -1,6 +1,24 @@
-# 2020/02/03 ~
-
+# 2020/01/31 ~
 ## 트렌젝션 : 데이터베이스의 상태를 변경해주는 것 !!외우자!!
+> 2020/01/31
+## Database 시작하기
++
+  + 관리자 계정
+    + 데이터베이스의 생성과 관리를 담당하는 슈퍼 유저 계정  
+    오브젝트의 생성, 변경, 삭제 등의 작업이 가능하며  
+    데이터베이스에 대한 모든권한과 책임을 가지는 계정
+  + 사용자 계정
+    + 데이터베이스에 대하여 질의(Query), 갱신, 보고서를 작성 등의 작업을 수행할 수 있는 계정  
+    일반 계정은 보안을 위해 최소한의 필요한 권한만 가지는 것을 원칙으로 함
+    
+  ```SQL
+    USER KH IDENTIFIED BY KH;
+    -- 계정이름         비밀번호
+       
+    GRANT RESOURCE, CONNECT TO KH;
+    -- 계정에 권한을 부여하는 
+  ```
+
 > 2020/02/03
 ### 
 + 행, 튜플
@@ -80,6 +98,38 @@
   + 가급적 ""(더블 커텐션)으로 묶도록 연습하자.!
 
 > 2020/02/04
+### DQL - SELECT
++ 위에 SELECT를 이어서 작성해보자..!
++ 
+  + 리터럴
+    + 임의로 정한 문자열을 SELECT절에 사용하면 테이블에 존재하는 데이터처럼 사용 가능  
+  문자나 날짜 리터럴은 ' ' 기호가 사용되며 모든 행에 반복 표시됨
+  
+  ```SQL
+    SELECT EMP_ID "직원번호", EMP_NAME "사원명", SALARY "급여",'원' "단위"
+    FROM EMPLOYEE;
+  ```
+  
+  + DISTINCT
+    + 컬럼에 포함된 중복 값을 한 번씩만 표기하고자 할 때 사용  
+    **SELECT절에 딱 한 번만 쓸 수 있고 맨 앞에 써야한다.**
+  ```SQL
+    -- EMPLOYEE테이블에서 직원의 직급코드를 중복제거 하여 조회
+    SELECT DISTINCT JOB_CODE
+    FROM EMPLOYEE;
+    
+    -- EMPLOYEE테이블에서 부서코드와 직급코드를 중복제거 하여 조회
+    SELECT DISTINCT DEPT_CODE, DISTINCT JOB_CODE
+    FROM EMPLOYEE;
+    -- 에러가 발생한다.!! DISTINCT는 하나만 써야한다.!!
+    
+    -- 올바른 사용법
+    SELECT DISTINCT DEPT_CODE, JOB_CODE
+    FROM EMPLOYEE;
+  ```
+>
+### DQL - WHERE
+
 ### 함수
 +
   + 자바에서의 메소드를 의미 
