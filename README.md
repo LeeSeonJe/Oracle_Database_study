@@ -12,8 +12,8 @@
 >
 > 2020/02/04
 +
-  + ## [DQL-SELECT](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/DQL-SELECT.md#dql---select)
-  + ## [DQL-WHERE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/DQL-SELECT.md#dql---select)
+  + ## [DQL-SELECT](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/DQL.md#dql---select)
+  + ## [DQL-WHERE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/DQL.md#dql---where)
 >
 >2020/02/05
 +
