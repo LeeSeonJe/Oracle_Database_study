@@ -60,6 +60,12 @@
   ```SQL
     SELECT EMP_ID "직원번호", EMP_NAME "사원명", SALARY "급여",'원' "단위"
     FROM EMPLOYEE;
+    
+    -- EMPLOYEE테이블에서 퇴사 여부가 N인 직원을 조회하고
+    -- 근무 여부를 재직중으로 표시하여 사번, 이름, 고용일, 근무 여부 조회
+    SELECT EMP_ID, EMP_NAME, HIRE_DATE, '재직중' "근무여부"
+    FROM EMPLOYEE
+    WHERE ENT_YN = 'N';
   ```
   
   + DISTINCT
@@ -112,6 +118,123 @@
       |LIKE / NOT LIKE|문자 패턴 비교|
       |IS NULL / IS NOT NULL|NULL 여부 비교|
       |IN / NOT IN|비교 값 목록에 포함/미포함 되는지 여부 비교|
+      + #### SQL EXAMPLE
+      + '='
+      ```SQL
+        --EMPLOYEE테이블에서 부서코드가 'D9'인 직원의 이름, 부서코드 조회
+        SELECT EMP_NAME, DEPT_CODE
+        FROM EMPLOYEE
+        WHERE DEPT_CODE = 'D9';
+      ```
+      + '>,<'
+      ```SQL
+        -- EMPLOYEE테이블에서 급여가 4000000 초과인 직원의 이름, 급여 조회
+        SELECT EMP_NAME, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY > 4000000;
+      ```
+      + '>= , =<'
+      ```SQL
+        -- EMPLOYEE테이블에서 급여가 4000000 이상인 직원의 이름, 급여 조회
+        SELECT EMP_NAME, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY >= 4000000;
+      ```
+      + '<> , != , ^='
+      ```SQL
+        -- EMPLOYEE테이블에서 부서코드가 D9이 아닌 사원의 사번, 이름, 부서코드 조회
+        SELECT EMP_ID, EMP_NAME, DEPT_CODE
+        FROM EMPLOYEE
+        WHERE DEPT_CODE != 'D9';
+        --WHERE DEPT_CODE ^= 'D9';
+        --WHERE DEPT_CODE <> 'D9';
+      ```
+      + 'BETWEEN AND'
+      ```SQL
+        -- 급여를 3500000원 보다 많이 받고 6000000보다 적게 받는 사원의 이름, 급여 조회
+        SELECT EMP_NAME, SALARY
+        FROM EMPLOYEE
+        WHERE SALARY BETWEEN 3500000 AND 6000000;
+      ```
+      + 'LIKE / NOT LIKE'
+      ```SQL
+        -- 비교하려는 값이 지정한 특정 패턴을 만족 시키는지 조회
+        -- % : 0글자 이상
+        -- _ : 1글자
+        -- '글자%' : 글자로 시작하는 값
+        -- '%글자%' : 글자가 포함된 값
+        -- '%글자' : 글자로 끝나는 값 
+        -- '_' : 한 글자
+        -- '__' : 두 글자
+        -- '박__' : 박으로 시작하는 세글자
+
+        -- EMPLOYEE테이블에서 성이 전씨인 사원의 사번, 이름, 고용일 조회
+        SELECT EMP_ID, EMP_NAME, HIRE_DATE
+        FROM EMPLOYEE
+        WHERE EMP_NAME LIKE '전%';
+        --WHERE EMP_NAME LIKE '전__'; // 이름이 2글자 3글자가 넘어가면 적용되지 않음
+
+        -- EMPLOYEE테이블에서 이름이 '하'가 포함된 직원의 이름, 주민번호, 부서코드 조회
+        SELECT EMP_NAME, EMP_NO, DEPT_CODE
+        FROM EMPLOYEE
+        WHERE EMP_NAME LIKE '%하%';
+
+        -- EMPLOYEE테이블에서 전화번호 4번째 자리가 9로 시작하는 사원의 사번, 이름, 전화번호 조회
+        SELECT EMP_ID, EMP_NAME, PHONE
+        FROM EMPLOYEE
+        WHERE PHONE LIKE '___9%';
+
+        -- 이메일 중 _ 앞글자가 3자리인 이메일 주소를 가진 사원의 사번, 이름, 이메일 주소 조회
+        SELECT EMP_ID, EMP_NAME, EMAIL
+        FROM EMPLOYEE
+        WHERE EMAIL LIKE '____%';
+        -- 와일드카드인 _가 검색하고자 하는 조건 안에 들어가는 문자와 같기 때문에
+        -- 문자 자체가 아닌 와일드 카드로 인식
+
+        -- ESCAFE OPTION
+        SELECT EMP_ID, EMP_NAME, EMAIL
+        FROM EMPLOYEE
+        WHERE EMAIL LIKE '___\_%' ESCAPE '\';
+      ```
+      + 'IS NULL / IS NOT NULL'
+      ```SQL
+        -- EMPLOYEE테이블에서 보너스를 받지 않는 사원의 사번, 이름, 급여, 보너스 조회
+        SELECT EMP_ID, EMP_NAME, SALARY, BONUS
+        FROM EMPLOYEE
+        WHERE BONUS IS NULL;
+
+        -- EMPLOYEE테이블에서 보너스를 받는 사원의 사번, 이름, 급여, 보너스 조회
+        SELECT EMP_ID, EMP_NAME, SALARY, BONUS
+        FROM EMPLOYEE
+        WHERE NOT BONUS IS NULL;
+
+        -- EMPLOYEE테이블에서 관리자도 없고 부서배치도 받지 않은 직원의 이름, 관리자, 부서코드 조회
+        SELECT EMP_NAME, MANAGER_ID, DEPT_CODE
+        FROM EMPLOYEE
+        WHERE MANAGER_ID IS NULL AND DEPT_CODE IS NULL;
+
+        -- EMPLOYEE테이블에서 부서 배치를 받지 않았지만 보너스를 받는 직원의 이름, 보너스, 부서코드 조회
+        SELECT EMP_NAME, BONUS, DEPT_CODE
+        FROM EMPLOYEE
+        WHERE DEPT_CODE IS NULL AND BONUS IS NOT NULL;
+      ```
+      + 'IN / NOT IN'
+      ```SQL
+        -- 비교하려는 값 목록에 일차하는 값이 있으면 TRUE를 반환하는 연산자
+        -- EMPLOYEE테이블에서 부소커도가 D6이거나 D9인 사원의 이름, 부서코드, 급여 조회
+        SELECT EMP_NAME, DEPT_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE DEPT_CODE = 'D9' OR DEPT_CODE = 'D6';
+
+        SELECT EMP_NAME, DEPT_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE DEPT_CODE IN ('D6', 'D9');      
+        
+        -- 직급 코드가 J1, J2, J3, J4인 사람들의 이름, 직급 코드, 급여
+        SELECT EMP_NAME, JOB_CODE, SALARY
+        FROM EMPLOYEE
+        WHERE JOB_CODE IN ('J1', 'J2', 'J3', 'J4');
+      ```
     >
     
   + 논리 연산자
@@ -122,8 +245,26 @@
     |AND|여러 조건이 동시에 TRUE일 경우에만 TRUE값 반환|
     |OR|여러 조건들 중에 어느 하나의 조건만 TRUE이면 TRUE값 반환|
     |NOT|조건에 대한 반대 값으로 반환(NULL 제외)|
+    + 'AND'
     ```SQL
-    
+      -- EMPLOYEE테이블에서 부서코드가 'D6'이고 급여를 이백만보다 많은 직원의 이름, 부서코드, 급여 조회
+      SELECT EMP_NAME, DEPT_CODE, SALARY
+      FROM EMPLOYEE
+      WHERE DEPT_CODE = 'D6' AND SALARY >2000000;
+    ```
+    + 'OR'
+    ```SQL
+      -- EMPLOYEE테이블에서 부서코드가 'D6' 이거나 급여를 이백만보다 많은 직원의 이름, 부서코드, 급여 조회
+      SELECT EMP_NAME, DEPT_CODE, SALARY
+      FROM EMPLOYEE
+      WHERE DEPT_CODE = 'D6' OR SALARY >2000000;
+    ```
+    + 'NOT'
+    ```SQL
+      -- EMPLOYEE테이블에서 부서코드가 'D6' 이 아닌 직원의 이름, 부서코드, 급여 조회
+      SELECT EMP_NAME, DEPT_CODE, SALARY
+      FROM EMPLOYEE
+      WHERE NOT DEPT_CODE = 'D6';
     ```
  
 
