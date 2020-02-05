@@ -598,10 +598,10 @@
   -- NULL값을 가진 행은 평균 계산에서 제외 되어 계산, 그러므로 NVL로 치환해서 계산해주자!!
   ```
   + **COUNT** : 테이블 조건을 만족하는 **행의 개수** 반환
-    + COUNT(* | 컬럼명) : 행의 개수 리턴
-    + COUNT(DISTINCT 컬럼명) : 중복을 제거한 행 개수 리턴
-    + COUNT(*) : NULL을 포함한 전체 행 개수 리턴
-    + COUNT(컬럼명) : NULL을 제외한 전체 행 개수 리턴
+    + COUNT(* | 컬럼명) : **행의 개수** 리턴
+    + COUNT(DISTINCT 컬럼명) : **중복을 제거**한 행 개수 리턴
+    + COUNT(*) : **NULL을 포함**한 전체 행 개수 리턴
+    + COUNT(컬럼명) : **NULL을 제외**한 전체 행 개수 리턴
     >
   ```SQL
   SELECT COUNT(*), COUNT(DEPT_CODE), COUNT(DISTINCT DEPT_CODE)
