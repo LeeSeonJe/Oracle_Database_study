@@ -27,3 +27,7 @@
     + ### [6. 선택 함수](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/2_FUNCTION.md#6-%EC%84%A0%ED%83%9D-%ED%95%A8%EC%88%98)
   + ## [FUNCTION - 그룹 함수](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/2_FUNCTION.md#%EA%B7%B8%EB%A3%B9-%ED%95%A8%EC%88%98)
   + ## [FUNCTION - HOMEWORK](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/2_FUNCTION.md#homework)
+
+>2020/02/06
++
+  + [GROUP BY]()
