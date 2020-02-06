@@ -775,5 +775,12 @@
   FROM EMPLOYEE
   WHERE DEPT_CODE='D5' OR DEPT_CODE = 'D6' OR DEPT_CODE='D9';
   -- 2) CASE WHEN
+  SELECT EMP_NAME "사원명", DEPT_CODE "부서코드",
+       CASE WHEN DEPT_CODE='D5' THEN '총무부'
+            WHEN DEPT_CODE='D6' THEN '기획부'
+            WHEN DEPT_CODE='D9' THEN '영업부'
+       END
+  FROM EMPLOYEE
+  WHERE DEPT_CODE IN ('D5', 'D6', 'D9');
   ```
 
