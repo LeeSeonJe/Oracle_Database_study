@@ -636,8 +636,8 @@
   -- 단, 별칭은 근무일수1, 근무일수2로 하고
   -- 모두 정수처리(내림), 양수가 되도록 처리
   SELECT EMP_NAME "사원명", 
-         ABS(FLOOR(MONTHS_BETWEEN(HIRE_DATE, SYSDATE))) "입사일-오늘", 
-         FLOOR(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)) "오늘-입사일"
+         ABS(FLOOR(HIRE_DATE - SYSDATE)) "입사일-오늘", 
+         FLOOR(SYSDATE - HIRE_DATE) "오늘-입사일"
   FROM EMPLOYEE;
 
 
