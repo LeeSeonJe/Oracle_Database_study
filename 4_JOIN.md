@@ -15,6 +15,8 @@
   **\* 연결에 사용할 두 컬럼 명이 같은 경우 테이블명.컬럼명 / FROM절의 테이블에 별칭 이용 가능**
     >
   ```SQL
+  -- 사번, 사원명, 부서 코드, 부서명 조회
+  
   -- 테이블명.컬럼명 사용
   SELECT EMP_ID, EMP_NAME, EMPLOYEE.JOB_CODE, JOB_NAME
   FROM EMPLOYEE, JOB
@@ -30,6 +32,8 @@
     + 연결에 사용하려는 컬럼 명이 같은 경우 USING() 사용, 다른 경우 ON() 사용
   >
   ```SQL
+  -- 사번, 사원명, 부서 코드, 부서명 조회
+  
   -- USING() 사용
   SELECT EMP_ID, EMP_NAME, JOB_CODE, JOB_NAME
   FROM EMPLOYEE
@@ -123,6 +127,24 @@
 + 하나 이상의 테이블에서 데이터를 조회하기 위해 사용하고 수행 결과는 **하나의 RESULT SET**으로 나옴
   >
   ```SQL
+  -- 사번, 사원 명, 부서 코드, 부서 명, 지역 명(LOCAL_NAME) 조회
+  -- 오라클
+  SELECT EMP_ID, EMP_NAME, DEPT_CODE, DEPT_TITLE, LOCAL_NAME
+  FROM EMPLOYEE, DEPARTMENT, LOCATION
+  WHERE DEPT_CODE = DEPT_ID 
+        AND LOCATION_ID = LOCAL_CODE;
+
+  -- ANSI 
+  SELECT EMP_ID, EMP_NAME, DEPT_CODE, DEPT_TITLE, LOCAL_NAME
+  FROM EMPLOYEE
+       JOIN DEPARTMENT ON(DEPT_CODE = DEPT_ID)
+       JOIN LOCATION ON (LOCATION_ID = LOCAL_CODE);
+  
+  
+  
+  -- 직급이 대리이면서 아시아 지역에 근무하는 직원조회
+  -- 사번, 이름, 직급명, 부서명, 근무지역명, 급여를 조회하세요.
+
   -- 오라클
   SELECT E.EMP_ID, E.EMP_NAME, D.DEPT_TITLE, L.LOCAL_NAME, SALARY
   FROM EMPLOYEE E, LOCATION L, JOB J, DEPARTMENT D
