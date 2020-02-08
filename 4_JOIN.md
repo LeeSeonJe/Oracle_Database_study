@@ -128,6 +128,7 @@
   >
   ```SQL
   -- 사번, 사원 명, 부서 코드, 부서 명, 지역 명(LOCAL_NAME) 조회
+  
   -- 오라클
   SELECT EMP_ID, EMP_NAME, DEPT_CODE, DEPT_TITLE, LOCAL_NAME
   FROM EMPLOYEE, DEPARTMENT, LOCATION
