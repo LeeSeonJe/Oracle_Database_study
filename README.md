@@ -60,3 +60,20 @@
     + ##### [INLINE-VIEW](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/5_SUBQUERY.md#7-inline-view)
   + #### [WITH](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/5_SUBQUERY.md#with)
   + #### [RANK() OVER / DENSE_RANK() OVER](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/5_SUBQUERY.md#rank-over--dense_rank-over)
+
+>2020/02/11
++
+  + #### [Data Dictionary 명령어](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#data-dictionary-%EB%AA%85%EB%A0%B9%EC%96%B4)
+  + #### [DDL이란?](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#ddl)
+  + #### [CREATE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#create)
+  + #### [Oracle Data Type](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#oracle-data-type)
+  + #### [TABLE COLUMN COMMENT](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#table-column-comment)
+  + #### [CONSTRAINTS] (https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#constraints)
+    + ##### [NOT NULL](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#not-null)
+    + ##### [UNIQUE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#unique)
+    + ##### [PRIMARY KEY](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#primary-key)
+    + ##### [FOREIGN KEY](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#foreign-key)
+    + ##### [CHECK](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#check)
+    + ##### [SUBQUERY](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#subquery)
+    
+  
