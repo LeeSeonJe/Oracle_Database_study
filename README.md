@@ -68,7 +68,7 @@
   + #### [CREATE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#create)
   + #### [Oracle Data Type](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#oracle-data-type)
   + #### [TABLE COLUMN COMMENT](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#table-column-comment)
-  + #### [CONSTRAINTS] (https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#constraints)
+  + #### [CONSTRAINTS](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#constraints)
     + ##### [NOT NULL](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#not-null)
     + ##### [UNIQUE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#unique)
     + ##### [PRIMARY KEY](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#primary-key)
