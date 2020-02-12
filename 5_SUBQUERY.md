@@ -330,5 +330,69 @@
                                FROM EMPLOYEE
                                GROUP BY JOB_CODE);
   ```
+  + #### **5. 상관 서브쿼리**
+  + #### **6. 스칼라 서브쿼리**
+  + #### **7. INLINE-VIEW**
+    + FROM절에서 서브쿼리를 사용하는 것
+    + 서브쿼리가 만든 결과(RESULT SET)를 테이블 대신 사용 ==> 서브쿼리로 나온 테이블을 통해 컬럼값을 뽑아냄
+  ```SQL
+  -- 전 직원 중 급여가 높은 상위 5명의 순위, 이름, 급여 조회
+  -- ROWNUM : 내가 가져온 순서를 가지고 번호를 부여하는 것.
+  SELECT EMP_NAME, SALARY
+  FROM EMPLOYEE
+  ORDER BY SALARY DESC;
+
+  SELECT ROWNUM, EMP_NAME, SALARY
+  FROM EMPLOYEE
+  ORDER BY SALARY DESC;
+
+  SELECT ROWNUM, EMP_NAME, SALARY
+  FROM (SELECT *
+        FROM EMPLOYEE
+        ORDER BY SALARY DESC)
+  WHERE ROWNUM <= 5;
+
+  -- 급여 평균 3위 안에 드는 부서의 부서 코드와 부서 명, 평균 급여 조회
+  SELECT DEPT_CODE, DEPT_TITLE, AVG(SALARY)
+  FROM EMPLOYEE
+       JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+  GROUP BY DEPT_CODE, DEPT_TITLE
+  ORDER BY AVG(SALARY) DESC;
+
+  SELECT DEPT_CODE, DEPT_TITLE, 평균급여
+  FROM (SELECT DEPT_CODE, DEPT_TITLE, AVG(SALARY) "평균급여"
+        FROM EMPLOYEE
+             JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+  GROUP BY DEPT_CODE, DEPT_TITLE
+  ORDER BY AVG(SALARY) DESC)
+  WHERE ROWNUM <=3;
+  ```
+### WITH
+  + 서브쿼리에 이름을 붙여주고 사용 시 이름으로 사용하게 함 
+  + INLINE-VIEW로 사용될 서브쿼리에 주로 사용
+  + 같은 서브쿼리가 여러번 사용될 경우 중복 작성을 줄임, **실행속도가 빨라짐**
+  ```SQL
+  SELECT ROWNUM, EMP_NAME, SALARY
+  FROM (SELECT EMP_NAME, SALARY
+        FROM EMPLOYEE
+        ORDER BY SALARY DESC);
+
+  WITH TOPN_SAL AS (SELECT EMP_NAME, SALARY
+                  FROM EMPLOYEE
+                  ORDER BY SALARY DESC)
+  SELECT ROWNUM, EMP_NAME, SALARY
+  FROM TOPN_SAL;
+  ```
+### RANK() OVER / DENSE_RANK() OVER
+  + RANK() OVER : 동일한 순위 이후의 등수를 동일한 인원 수만큼 건너 뛰고 순위
+  + DENSE_RANK() OVER : 동일한 순위 이후의 등수를 바로 다음 등수로 처리
+  ```SQL
+  SELECT RANK() OVER(ORDER BY SALARY DESC) 순위, EMP_NAME, SALARY
+  FROM EMPLOYEE;
+  RESULT ==> 1,2,2,4,5,6,7,8,9 이런식으로 RANK됨
   
-+ INLINE-VIEW
+  SELECT DENSE_RANK() OVER(ORDER BY SALARY DESC) 순위, EMP_NAME, SALARY
+  FROM EMPLOYEE;
+  RESULT ==> 1,2,2,3,4,5,6,7,8 이런식으로 RANK
+  ```
+  
