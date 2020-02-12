@@ -94,7 +94,7 @@
     |PRIMARY KEY|NULL과 중복 값을 허용하지 않음 (**컬럼의 고유식별자**로 사용하기 위해)|
     |FOREIGN KEY|참조되는 테이블의 컬럼의 값이 존재하면 허용|
     |CHECK|저장 가능한 데이터 값의 범위나 조건을 지정하여 설정한 값만 허용|  
-> NOT NULL / UNIQUE / PRIMARY KEY / FOREIGN KEY / CHECK
+>
 + 제약조건 기술방법
   >
   ```SQL
@@ -148,6 +148,7 @@
   INSERT INTO USER_UNIQUE3 VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1111-2222','hong123@kh.or.kr');
   -- 행 삽입 불가 ==> 맨위와 NO와 ID가 같아 삽입 불가
   ```
+> NOT NULL / UNIQUE / PRIMARY KEY / FOREIGN KEY / CHECK
 + ##### NOT NULL
   + 데이터의 NULL을 허용하지 않는다.
   ```SQL
