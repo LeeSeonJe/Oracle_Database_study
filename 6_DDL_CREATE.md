@@ -296,6 +296,36 @@
   -- 행 삽입 불가 ==> 지정한 범위인 0보다 커야하는데 -1은 0보다 작으므로 제약조건 위반
   ```
   
++ ##### SUBQUERY
+  + 서브 쿼리를 이용해서 SELECT의 조회 결과로 테이블을 생성하는 방법
+  + 컬럼 명과 데이터 타입, 값이 복사되고 제약 조건은 **NOT NULL만** 복사됨
+  >
+  ```SQL
+  -- 서브쿼리를 통해서 테이블 전체를 복사하는 CREATE문
+  CREATE TABLE EMPLOYEE_COPY
+  AS SELECT * FROM EMPLOYEE;
+  
+  SELECT * FROM EMPLOYEE_COPY;
+  
+  -- 서브쿼리를 통해서 원하는 값만 가져오는 CREATE문
+  CREATE TABLE EMPLOYEE_COPY2
+  AS SELECT EMP_ID, EMP_NAME, SALARY, DEPT_TITLE, JOB_NAME
+      FROM EMPLOYEE
+          LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+          LEFT JOIN JOB USING(JOB_CODE);
+
+  SELECT * FROM EMPLOYEE_COPY2;
+  
+  -- 테이블 틀만 가져오기 위한 서브쿼리를 통한 CREATE문
+  CREATE TABLE EMP_MANAGER
+  AS SELECT EMP_ID,EMP_NAME,MANAGER_ID
+     FROM EMPLOYEE
+     WHERE 1=0;
+  ```
+  + 마지막 서브쿼리 예시에서 WHERE 절에 1 = 0 이라는 값을 살펴보자
+  + **ERE 1 = 0 은 무조건 FALSE이다.**
+  + 이렇게 쓰는 이유는 데이터는 가져오지 않고 테이블 틀만 가져와 사용하겠다는 의미이다.  
+  **자주 사용한다고 한다. 외우도록 하자**
 + **CREATE와 제약조건... 많은 양을 한번에 해서 정리하기가 쉽지 않았다.  
   가급적으로 에러 내용에 관해서만 기술 하였으며 에러가 발생하였을 때 당황하지 말고 천천히 풀어보자.  
   제약조건을 잘 생각하면서 천천히 CREATE TABLE을 하면 잘 만들 수 있을 것 같다.**
