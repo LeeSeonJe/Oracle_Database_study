@@ -36,20 +36,21 @@
   ```
   
 ### Oracle Data Type
-|데이터형|설명|
-|:-----:|:--:|
-|CHAR(크기)|고정길이 문자 데이터|
-|VARCHAR2(크기)|가변길이 문자 데이터 (최대 4,000Byte)|
-|NUMBER|숫자 데이터 (최대 40자리)|
-|NUMBER(길이)|숫자 데이터로, 길이 지정 가능 (최대 38자리)|
-|DATE|날짜 데이터 (BC 4712년 1월 1일 ~ AD 4712년 12월 31일)|
-|LONG|가변 길이 문자형 데이터 (최대 2GB)|
-|LOB|2GB까지의 가변길이 바이너리 데이터 저장 가능 (이미지, 실행파일 등 저장 가능)|
-|ROWID|DB에 저장되지 않는 행을 식별할 수 있는 고유 값|
-|BFILE|대용량의 바이너리 데이터 저장가능 (최대 4GB)|
-|TIMESTAMP|DATE형의 확장된 형태|
-|INTERVAL YEAR TO MONTH|년과 월을 이용하여 기간 저장|
-|INTERVAL DAY TO SEOCND|일, 시, 분, 초를 이용하여 기간 저장|
++ 
+  |데이터형|설명|
+  |:-----:|:--:|
+  |CHAR(크기)|고정길이 문자 데이터|
+  |VARCHAR2(크기)|가변길이 문자 데이터 (최대 4,000Byte)|
+  |NUMBER|숫자 데이터 (최대 40자리)|
+  |NUMBER(길이)|숫자 데이터로, 길이 지정 가능 (최대 38자리)|
+  |DATE|날짜 데이터 (BC 4712년 1월 1일 ~ AD 4712년 12월 31일)|
+  |LONG|가변 길이 문자형 데이터 (최대 2GB)|
+  |LOB|2GB까지의 가변길이 바이너리 데이터 저장 가능 (이미지, 실행파일 등 저장 가능)|
+  |ROWID|DB에 저장되지 않는 행을 식별할 수 있는 고유 값|
+  |BFILE|대용량의 바이너리 데이터 저장가능 (최대 4GB)|
+  |TIMESTAMP|DATE형의 확장된 형태|
+  |INTERVAL YEAR TO MONTH|년과 월을 이용하여 기간 저장|
+  |INTERVAL DAY TO SEOCND|일, 시, 분, 초를 이용하여 기간 저장|
 
 + VARCHAR2 선언에 대한 검색 결과
   + 가변길이로써 데이터를 저장할 때 남는 공백없이 저장하게 해주어 메모리 낭비를 하지않는다.
@@ -113,6 +114,7 @@
 + 제약조건 이름설정
   + 컬럼레벨 : {컬럼명} {자료형} CONSTRAINT {제약조건명} {제약조건}
   + 테이블레벨 : CONSTRAINT {제약조건명} {제약조건(테이블명)}
+  >
   ```SQL
   CREATE TABLE CONS_NAME (
       TEST_DATA1 VARCHAR2(20) CONSTRAINT NN_TEST_DATA1 NOT NULL, <--컬럼레벨
@@ -151,6 +153,7 @@
 > NOT NULL / UNIQUE / PRIMARY KEY / FOREIGN KEY / CHECK
 + ##### NOT NULL
   + 데이터의 NULL을 허용하지 않는다.
+  >
   ```SQL
   CREATE TABLE USER_UNIQUE3(
         USER_NO NUMBER,
@@ -168,7 +171,131 @@
     -- PWD는 NOT NULL이기 때문에 NULL 값이 들어가게 되면 나오는 에러이다.
   ```
 + ##### UNIQUE
+  + 중복 값을 허용하지 않는다.
+  >
+  ```SQL
+  CREATE TABLE USER_UNIQUE2(
+      USER_NO NUMBER,
+      USER_ID VARCHAR2(20),
+      USER_PWD VARCHAR2(30),
+      USER_NAME VARCHAR2(30),
+      GENDER VARCHAR2(10),
+      PHONE VARCHAR2(30),
+      EMAIL VARCHAR2(50),
+      UNIQUE(USER_ID)
+  );
 
+  INSERT INTO USER_UNIQUE2 VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1111-2222','hong123@kh.or.kr');
+  -- 행 삽입 가능 ==> 아무 것도 없으므로...
+  INSERT INTO USER_UNIQUE2 VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1111-2222','hong123@kh.or.kr');
+  -- 오류 보고 - ORA-00001: unique constraint (KH.SYS_C007253) violated
+  -- 행 삽입 불가 ==> UNIQUE 제약조건을 위반하였다고 에러가 난다. USER_ID가 존재하는데 또 삽입하려고 하기 때문에 나는 에러
+  ```
 + ##### PRIMARY KEY
+  + NOT NULL + UNIQUE
+  + 한 행을 구분할 수 있는 고유 식별자 역할
+  + 한 테이블 당 하나만 설정 가능, 컬럼레벨 / 테이블레벨 둘다 생성 가능
+  + 한 개 컬럼에 설정할 수 있고 여러 개 컬럼을 묶어서 설정(복합키) 할 수 있음
+  >
+  ```SQL
+  CREATE TABLE USER_PRIMARYKEY(
+      USER_NO NUMBER CONSTRAINT PK_USER_NO PRIMARY KEY,
+      USER_ID VARCHAR2(20) UNIQUE,
+      USER_PWD VARCHAR2(30) NOT NULL,
+      USER_NAME VARCHAR2(30),
+      GENDER VARCHAR2(10),
+      PHONE VARCHAR2(30),
+      EMAIL VARCHAR2(50)
+  );
+  INSERT INTO USER_PRIMARYKEY VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1111-2222','hong123@kh.or.kr');
+  -- 행 삽입 가능 ==> 아무 것도 없으므로...
+  INSERT INTO USER_PRIMARYKEY VALUES(1, 'user02', 'pass02', '이순신', '남', '010-2222-3333','lee123@kh.or.kr');
+  -- 오류 보고 - ORA-00001: unique constraint (KH.PK_USER_NO) violated 
+  -- 행 삽입 불가 ==> 이미 NO에 1이 있으므로 PRIMARY KEY의 UNIQUE 제약조건을 위반함.
+  INSERT INTO USER_PRIMARYKEY VALUES(NULL, 'user02', 'pass02', '이순신', '남', '010-2222-3333','lee123@kh.or.kr');
+  -- 오류 보고 - ORA-01400: cannot insert NULL into ("KH"."USER_PRIMARYKEY"."USER_NO")
+  -- 행 삽입 불가 ==> PRIMARY KEY의 NOT NULL 제약조건을 위반함.
+  ```
 + ##### FOREIGN KEY
+  + 참조 무결성을 위한 제약조건으로 참조된 다른 테이블이 제공한 값만 사용하도록 제한을 거는 것
+  + 참조할 테이블의 참조할 컬럼 명을 **생략할 경우 PRIMARY KEY로 설정된 컬럼**이 자동으로 참조할 컬럼이 됨
+  + 참조된 다른 테이블이 제공하는 값만 사용할 수 있음
+  + 제공 되는 값 외에는 NULL 사용 가능
+  >
+  ```SQL
+  -- 참조할 테이블
+  CREATE TABLE USER_GRADE(
+      GRADE_CODE NUMBER PRIMARY KEY,
+      GRADE_NAME VARCHAR2(30) NOT NULL
+  );
+
+  INSERT INTO USER_GRADE VALUES(10, '일반회원');
+  INSERT INTO USER_GRADE VALUES(20, '우수회원');
+  INSERT INTO USER_GRADE VALUES(30, '특별회원');
+
+  CREATE TABLE USER_FOREIGNKEY(
+      USER_NO NUMBER PRIMARY KEY,
+      USER_ID VARCHAR2(20) UNIQUE,
+      USER_PWD VARCHAR2(30) NOT NULL,
+      USER_NAME VARCHAR2(30),
+      GENDER VARCHAR2(10),
+      PHONE VARCHAR2(30),
+      EMAIL VARCHAR2(50),
+      GRADE_CODE NUMBER,
+      CONSTRAINT FK_GRADE_CODE FOREIGN KEY(GRADE_CODE) REFERENCES USER_GRADE(GRADE_CODE) <-- 
+  );
+
+  INSERT INTO USER_FOREIGNKEY VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1111-2222','hong123@kh.or.kr',10);
+  -- 행 삽입 가능 ==> 아무 것도 없으므로... AND 참조하는 테이블에서 참조할 행이 있으므로 삽입 가능
+  INSERT INTO USER_FOREIGNKEY VALUES(2, 'user02', 'pass02', '이순신', '남', '010-2222-3333','lee123@kh.or.kr',10);
+  -- 행 삽입 가능 ==> 제약조건을 모두 허용하며 참조하는 테이블에서 참조할 행이 있으므로 삽입 가능
+  INSERT INTO USER_FOREIGNKEY VALUES(3, 'user03', 'pass03', '유관순', '남', '010-3333-4444','yoo123@kh.or.kr',30);
+  -- 행 삽입 가능 ==> 제약조건을 모두 허용하며 참조하는 테이블에서 참조할 행이 있으므로 삽입 가능
+  INSERT INTO USER_FOREIGNKEY VALUES(4, 'user04', 'pass04', '안중근', '남', '010-4444-5555','ahn123@kh.or.kr',null);
+  -- 행 삽입 가능 ==> 제약조건을 모두 허용하며 참조하는 테이블에서 제공 되는 값 외에는 NULL 사용 가능하므로 삽입 가능
+  INSERT INTO USER_FOREIGNKEY VALUES(5, 'user05', 'pass05', '윤봉길', '남', '010-5555-6666','ahn123@kh.or.kr',50
+  -- 오류 보고 - ORA-02291: integrity constraint (KH.FK_GRADE_CODE) violated - parent key not found
+  -- 오류 내용 : 참조하는 테이블에서 부모키를 찾을 수 없다고 한다.
+  -- 행 삽입 불가 ==> 제약조건은 모두 허용했지만 참조하는 테이블에 50이라는 값이 존재 하지 않으므로 삽입 불가, 없는 값은 NULL만 가능하다!!
+  ```
 + ##### CHECK
+  + 컬럼에 기록되는 값에 조건 설정 (변하는 값, 함수 사용 불가능)
+  + 성별 또는 숫자 범위등에 사용한다.
+  >
+  ```SQL
+  -- CHECK 제약조건 (성별)
+  CREATE TABLE USER_CHECK(
+    USER_NO NUMBER PRIMARY KEY,
+    USER_ID VARCHAR2(20) UNIQUE,
+    USER_PWD VARCHAR2(30) NOT NULL,
+    USER_NAME VARCHAR2(30),
+    GENDER VARCHAR2(10) CHECK(GENDER IN ('남', '여')),
+    PHONE VARCHAR2(30),
+    EMAIL VARCHAR2(50)
+  );
+
+  INSERT INTO USER_CHECK VALUES(1, 'user01', 'pass01', '홍길동', '남', '010-1111-2222','hong123@kh.or.kr');
+  -- 행 삽입 가능 ==> 제약조건을 모두 허용하므로.. 
+  INSERT INTO USER_CHECK VALUES(2, 'user02', 'pass02', '홍길동', '남자', '010-1111-2222','hong123@kh.or.kr');
+  -- 오류 보고 - ORA-02290: check constraint (KH.SYS_C007212) violated
+  -- 오류 내용 : CHECK 제약조건 위반 
+  -- 행 삽입 불가 ==> '남'으로 지정하였기 때문에 '남자'는 제약조건에 위반된다.
+  
+  -- CHECK 제약조건(숫자 범위)
+  CREATE TABLE USER_CHECK2(
+      TEST_NUMBER NUMBER,
+      CONSTRAINT CK_TEST_NUMBER CHECK(TEST_NUMBER > 0)
+  );
+
+
+  INSERT INTO USER_CHECK2 VALUES(10);
+  -- 행 삽입 가능 ==> CHECK 제약조건에 허용되어 삽입 가능
+  INSERT INTO USER_CHECK2 VALUES(-1);
+  -- 오류 보고 - ORA-02290: check constraint (KH.CK_TEST_NUMBER) violated
+  -- 오류 내용 : CHECK 제약조건 위반 
+  -- 행 삽입 불가 ==> 지정한 범위인 0보다 커야하는데 -1은 0보다 작으므로 제약조건 위반
+  ```
+  
++ **CREATE와 제약조건... 많은 양을 한번에 해서 정리하기가 쉽지 않았다.  
+  가급적으로 에러 내용에 관해서만 기술 하였으며 에러가 발생하였을 때 당황하지 말고 천천히 풀어보자.  
+  제약조건을 잘 생각하면서 천천히 CREATE TABLE을 하면 잘 만들 수 있을 것 같다.**
