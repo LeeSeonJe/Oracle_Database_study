@@ -77,3 +77,12 @@
     + ##### [SUBQUERY](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#subquery)
   + #### [FOREING KEY OPTION](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/6_DDL_CREATE.md#foreing-key-option)
   
+>2020/20/13
++
+  + #### [DML](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#dml)
+    + ##### [INSERT](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#insert)
+    + ##### [INSERT ALL](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#insert-all)
+    + ##### [UPDATE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#update)
+    + ##### [DELETE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#delete)
+    + ##### [TRUNCATE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#truncate)
+    
