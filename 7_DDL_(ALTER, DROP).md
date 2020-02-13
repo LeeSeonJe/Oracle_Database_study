@@ -1,0 +1,2 @@
+# DDL_ALTER
+# DDL_DROP
