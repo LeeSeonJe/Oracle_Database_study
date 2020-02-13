@@ -336,6 +336,7 @@
   + 부모테이블의 행이 수정되거나 삭제될 때 참조 테이블에서도 해당 행이 수정되거나 삭제되는 것.
 + **NO ACTION / RESTRICT**
   + 참조 테이블에 데이터가 남아있는 경우 부모테이블의 데이터는 수정 또는 삭제할 수 없다.
+  + ON DELETE RESTRICTED(삭제 제한)로 기본 저장되어 있음.
 + **SET NULL**
   + 부모 테이블에서 행을 수정 및 삭제하면 해당 외래 키를 구성하는 모든 값이 NULL로 설정됨.
 + **SET DEFAULT**
@@ -347,7 +348,15 @@
     ............
     ............
     ............
-    컬럼명 자료형 REFERENCES 부모테이블(참조컬럼) 
+    1) [컬럼명 자료형] REFERENCES 부모테이블(참조컬럼) 
              { ON DELETE, ON UPDATE }  { CASCADE, RESTRICT / NO ACTION, SET NULL, SET DEFAULT }
-  
+    2) CONSTRAINT 제약조건명 REFERENCES 부모테이블(참조컬럼) 
+             { ON DELETE, ON UPDATE }  { CASCADE, RESTRICT / NO ACTION, SET NULL, SET DEFAULT }
+             
+    EX)
+    CONSTRAINT FK_GRADE_CODE2 FOREIGN KEY(GRADE_CODE) REFERENCES USER_GRADE2(GRADE_CODE) ON DELETE SET NULL
+    -- ON DELETE SET NULL : 부모 키 삭제 시 자식 키를 NULL로 변경
+    CONSTRAINT FK_GRADE_CODE3 FOREIGN KEY(GRADE_CODE) REFERENCES USER_GRADE3(GRADE_CODE) ON DELETE CASCADE
+    -- ON DELETE CASCADE : 부모 키 삭제 시 자식 키도 함께 삭제
+    
   ```
