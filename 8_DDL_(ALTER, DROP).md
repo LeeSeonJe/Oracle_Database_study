@@ -129,6 +129,8 @@
 +
   + 데이터베이스 객체를 삭제하는 구문
   + TABLE, VIEW, SEQUENCE, SYNONYM 등 객체 삭제
+  
+### DROP
 + **테이블 삭제**
   + 표현식  
   ***DROP TABLE*** 테이블명 [***CASCADE CONSTRAINT***];
