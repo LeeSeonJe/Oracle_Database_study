@@ -22,7 +22,7 @@
           LEFT JOIN NATIONAL USING(NATIONAL_CODE);
   ```
 ### VIEW DML
-+ VIEW INSERT / UPDATE / DELETE
+> VIEW INSERT / UPDATE / DELETE
 + 생성된 뷰에 요청한 DML구문이 **베이스 테이블**도 변경함 (주의할 것)
   > 
   ```SQL
@@ -176,7 +176,7 @@
   ```
   + 모든 DML 사용불가
   >
-  + 6\. JOIN을 이용해 여러 테이블을 연결한 경우
+  + **6\. JOIN을 이용해 여러 테이블을 연결한 경우**
   >
   ```SQL
   -- 사번, 사원 명, 부서 명 정보를 가지고 있는 V_JOINEMP 뷰 생성
@@ -200,4 +200,78 @@
   DELETE FROM V_JOINEMP
   WHERE EMP_ID = 219;
   ```
+  
+### VIEW OPTION
+> OR REPLACE, FORCE / NOFORCE, WITH CHECK OPTION. WITH READ ONLY
++ 
+  + **OR REPLACE** : 기존에 동일한 뷰 이름이 존재하는 경우 덮어쓰고, 존재하지 않으면 새로 생성
+  >
+  ```SQL
+  CREATE OR REPLACE VIEW V_EMP1
+  AS SELECT EMP_NO, EMP_NAME
+      FROM EMPLOYEE;
+
+  CREATE OR REPLACE VIEW V_EMP1
+  AS SELECT EMP_NO, EMP_NAME, SALARY
+      FROM EMPLOYEE;
+
+
+  CREATE VIEW V_EMP1
+  AS SELECT EMP_NO, EMP_NAME
+      FROM EMPLOYEE;
+  -- name is already used by an existing object
+  -- OR REPLACE 옵션이 없으므로 덮어쓰지 못하고 존재하는 테이블이라는 에러를 발생
+  ```
++ **FORCE / NOFORCE**
+  + **FORCE** : 서브쿼리에 사용된 테이블이 존재하지 않아도 뷰 생성
+  >
+  ```SQL
+  CREATE OR REPLACE FORCE VIEW V_EMP2
+  AS SELECT TCODE, TNAME, TCONTENT
+      FROM TT;
+  -- 경고: 컴파일 오류와 함께 뷰가 생성되었습니다.
+  ```
+  + **NOFORCE** : 서브쿼리에 사용된 테이블이 존재해야함 뷰 생성 (DEFAULT)
+  >
+  ```SQL
+  CREATE OR REPLACE VIEW V_EMP2
+  AS SELECT TCODE, TNAME, TCONTENT
+      FROM TT;
+  -- table or view does not exist
+  ```
+  + NOFORE 옵션을 주지 않아도 기본값이므로 존재하지 않는 테이블 에러를 발생하며 생성되지 않는다.
++
+  + **WITH CHECK OPTION** : 옵션을 설정한 컬럼의 값을 수정 불가능하게 함
+  >
+  ```SQL
+  CREATE OR REPLACE VIEW V_EMP3
+  AS SELECT *
+      FROM EMPLOYEE
+      WHERE DEPT_CODE = 'D9' 
+      WITH CHECK OPTION;
+
+  SELECT * FROM V_EMP3;
+
+  UPDATE V_EMP3
+  SET DEPT_CODE = 'D8'
+  WHERE EMP_ID = 200;
+  -- ORA-01402: view WITH CHECK OPTION where-clause violation
+  -- WHERE절에 대한 값을 변경시 WITH CHECK OPTION에 위배된다.
+  ```
+  + INSERT시에는 WHERE절의 조건에 해당해야 삽입 가능하다.
+  
++
+  + **WITH READ ONLY** : 뷰에 대해 조회만 가능, DML 사용 불가능
+  >
+  ```SQL
+  CREATE OR REPLACE VIEW V_DEPT
+  AS SELECT * FROM DEPARTMENT
+  WITH READ ONLY;
+
+  SELECT * FROM V_DEPT;
+
+  DELETE FROM V_DEPT;
+  -- "cannot perform a DML operation on a read-only view"
+  ```
+  
   
