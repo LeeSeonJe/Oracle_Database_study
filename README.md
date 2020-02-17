@@ -86,8 +86,12 @@
     + ##### [DELETE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#delete)
     + ##### [TRUNCATE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/7_DML.md#truncate)
  
- >2020/02/13
+>2020/02/13
 +
   + #### [DDL_ALTER](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/8_DDL_(ALTER%2C%20DROP).md#ddl_alter)
   + #### [DDL_DROP](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/8_DDL_(ALTER,%20DROP).md#ddl_drop)
-    
+>2020/02/14    
++
+  + #### [VIEW](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/9_VIEW.md#view)
+    + ##### [VIEW DML](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/9_VIEW.md#create-view)
+    + ##### [VIEW OPTION](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/9_VIEW.md#view-option)
