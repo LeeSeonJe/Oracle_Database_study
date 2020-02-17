@@ -5,6 +5,7 @@
 + USER_CONSTRAINTS : 테이블에 적용되어 있는 제약조건 조회
 + DESC (TABLE NAME) : 테이블 구조 표시
 + USER_VIEWS : 뷰에 대한 정보 조회
++ USER_SEQUENCES : 시퀀스에 대한 정보 조회
 + 더 많은 DD 명령어가 있지만 배우면서 추가할 예정
 
 ### DDL
