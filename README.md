@@ -95,3 +95,11 @@
   + #### [VIEW](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/9_VIEW.md#view)
     + ##### [VIEW DML](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/9_VIEW.md#create-view)
     + ##### [VIEW OPTION](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/9_VIEW.md#view-option)
+>2020/02/14
++
+  + #### [SEQUENCE](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/10_SEQUENCE.md#sequence)
+>2020/02/14
++
+  + #### [SYNONYM](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/11_SYNONYM.md#synonym)
+    + ##### [공개 동의어 / 비공개 동의어](https://github.com/LeeSeonJe/TIL_oracle_database/blob/master/11_SYNONYM.md#%EA%B3%B5%EA%B0%9C-%EB%8F%99%EC%9D%98%EC%96%B4--%EB%B9%84%EA%B3%B5%EA%B0%9C-%EB%8F%99%EC%9D%98%EC%96%B4)
+
