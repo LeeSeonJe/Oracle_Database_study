@@ -14,7 +14,7 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 변수, 상수 선언  
   &nbsp;&nbsp; 실행부 : **BEGIN**으로 시작  
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 로직 기술  
-  &nbsp;&nbsp; 예외처리부 : EXCEPTION  
+  &nbsp;&nbsp; 예외처리부 : **EXCEPTION**  
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 예외 상황 발생 시 해결하기 위한 문장 기술 
   <BR>
 
@@ -23,10 +23,14 @@
   SET SERVEROUTPUT ON;
   * 프로시저를 사용하여 출력하는 내용을 화면에 보여주도록 설정하는 환경변수로
   기본 값은 OFF여서 ON으로 변경
+  ```
+  + 환경설정을 해주지 않으면 
+  ```SQL
+  
   BEGIN
   DBMS_OUTPUT.PUT_LINE('HELLO WORLD');
   END;
   /
   * PUT_LINE이라는 프로시저를 이용하여 출력(DBMS_OTUPUT패키지에 속해있음)
   ```
-    
+  + 
