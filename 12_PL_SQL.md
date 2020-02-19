@@ -45,7 +45,7 @@
   BEGIN
     EMP_ID := 888;        ==> 값 초기화
     EMP_NAME := '배장남';  ==> 값 초기화
-    
+
     DBMS_OUTPUT.PUT_LINE('EMP_ID : ' || EMP_ID);    ==> JAVA에서의 System.out.println(); 역할
     DBMS_OUTPUT.PUT_LINE('EMP_NAME : ' || EMP_NAME);
     DBMS_OUTPUT.PUT_LINE('PI : ' || PI);
@@ -53,7 +53,7 @@
   /
   ```
 +  + JAVA와는 다르게 ORACLE에서는 대입연산자를 ***:=*** 로 정의하고 있으므로 주의하자.
-  > #### 레퍼런스 변수의 선언과 초기화, 변수 값 출력
+> #### 레퍼런스 변수의 선언과 초기화, 변수 값 출력
   ```SQL
   DECLARE
     EMP_ID EMPLOYEE.EMP_ID%TYPE;  -- 변수 EMP_ID의 타입을 EMPLOYEE테이블의 EMP_ID컬럼 타입으로 지정
@@ -63,12 +63,12 @@
     INTO EMP_ID, EMP_NAME     -- 변수이름
     FROM EMPLOYEE
     WHERE EMP_ID = '&EMP_ID';
-    
+
     DBMS_OUTPUT.PUT_LINE('EMP_ID : ' || EMP_ID);
     DBMS_OUTPUT.PUT_LINE('EMP_NAME : ' || EMP_NAME);
   END;
   /
-  
+
   -- 레퍼런스 변수로 EMP_ID, EMP_NAME, DEPT_CODE, JOB_CODE, SALARY를 선언하고
   -- EMPLOYEE 테이블에서 사번, 이름, 직급코드, 부서코드, 급여를 조회하고
   -- 선언한 레퍼런스 변수에 담아 출력하시오.
@@ -99,26 +99,26 @@
     + 표현법 --> **변수명 테이블명.컬럼명%TYPE\;**
   + 값을 받아오기 위한 **\&(암퍼센트\)** 사용
     + 표현법 --> **\'&문구'\;**
-  
-  > #### 한 행에 대한 ROWTYPE변수 선언과 초기화, 값 출력
-  ```SQL
-  DECLARE
-    E EMPLOYEE%ROWTYPE;
-    -- %ROWTYPE 테이블 또는 뷰의 컬럼 데이터 형, 크기, 속성 참조
-  BEGIN
-    SELECT *
-    INTO E
-    FROM EMPLOYEE
-    WHERE EMP_ID = '&사번';
-    
-    -- 사번, 이름, 주민번호, 급여
-    DBMS_OUTPUT.PUT_LINE('EMP_ID : ' || E.EMP_ID);
-    DBMS_OUTPUT.PUT_LINE('EMP_NAME : ' || E.EMP_NAME);
-    DBMS_OUTPUT.PUT_LINE('EMP_NO : ' || E.EMP_NO);
-    DBMS_OUTPUT.PUT_LINE('SALARY : ' || E.SALARY);
-  END;
-  /
-  ```
+
+> #### 한 행에 대한 ROWTYPE변수 선언과 초기화, 값 출력
+```SQL
+DECLARE
+  E EMPLOYEE%ROWTYPE;
+  -- %ROWTYPE 테이블 또는 뷰의 컬럼 데이터 형, 크기, 속성 참조
+BEGIN
+  SELECT *
+  INTO E
+  FROM EMPLOYEE
+  WHERE EMP_ID = '&사번';
+
+  -- 사번, 이름, 주민번호, 급여
+  DBMS_OUTPUT.PUT_LINE('EMP_ID : ' || E.EMP_ID);
+  DBMS_OUTPUT.PUT_LINE('EMP_NAME : ' || E.EMP_NAME);
+  DBMS_OUTPUT.PUT_LINE('EMP_NO : ' || E.EMP_NO);
+  DBMS_OUTPUT.PUT_LINE('SALARY : ' || E.SALARY);
+END;
+/
+```
 + 
   + 테이블이나 뷰에 대한 컬럼의 정보를 가져와 변수를 설정하기 위해서는 **\%ROWTYPE**을 사용한다.
     + 표현식 --> **변수명 테이블명%ROWTYPE\;**
