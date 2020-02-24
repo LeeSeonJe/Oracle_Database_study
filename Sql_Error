@@ -1,0 +1,7 @@
+database not open
+
+redo log read error block 'number' count 'number'
+
+http://shaharear.blogspot.kr/2013/06/recover-database-from-ora-00333-redo.html
+
+https://jangpd007.tistory.com/236
