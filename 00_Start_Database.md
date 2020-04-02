@@ -9,7 +9,7 @@
     일반 계정은 보안을 위해 최소한의 필요한 권한만 가지는 것을 원칙으로 함
     
   ```SQL
-    USER KH IDENTIFIED BY KH;
+    CREATE USER KH IDENTIFIED BY KH;
     -- 계정이름         비밀번호
        
     GRANT RESOURCE, CONNECT TO KH;
